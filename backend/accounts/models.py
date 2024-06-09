@@ -8,6 +8,7 @@ import jwt
 from datetime import datetime, timedelta
 from django.conf import settings
 # from users.otp import generateKey
+from accounts.restaurantModel import Restaurant
 
 
 def upload_to(instance, filename):
@@ -71,19 +72,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         null=False
     )
 
-    restaurantName = models.CharField(
-        _('restaurantName'),
-        max_length=30,
-        default='',
-        null=False
-    )
-    restaurantAddress = models.CharField(
-        _('restaurantAddress'),
-        max_length=40,
-        default='',
-        null=False
-    )
-    ownerName = models.CharField(
+    full_name = models.CharField(
         _('ownerName'),
         max_length=30,
         default='',
@@ -95,7 +84,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         default='',
         null=False
     )
-
+    connectedRestaurant = models.ForeignKey(Restaurant, null=True, related_name='Restaurant', on_delete=models.CASCADE)
     address = models.CharField(
         _('address'),
         max_length=50,
@@ -126,18 +115,26 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=True,
     )
 
-    totalBal = models.FloatField(default=0)
-    is_staff = models.BooleanField(
-        _('staff status'),
-        default=False,
-    )
-
     is_admin = models.BooleanField(
         _('admin'),
         default=False,
 
     )
+    is_manager = models.BooleanField(
+        _('admin'),
+        default=False,
 
+    )
+    is_waiter = models.BooleanField(
+        _('admin'),
+        default=False,
+
+    )
+    is_staff = models.BooleanField(
+        _('admin'),
+        default=False,
+
+    )
     is_administrator = models.BooleanField(
         _('administrator'),
         default=False,
