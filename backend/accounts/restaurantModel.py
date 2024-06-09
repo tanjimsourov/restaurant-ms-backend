@@ -20,6 +20,6 @@ class Restaurant(models.Model):
     Most_selling_item = models.CharField(max_length=100, default='')
     Monthly_profit = models.FloatField(default=0)
     Yearly_profit = models.FloatField(default=0)
-    totalPayable = models.FloatField(default=0)
+    DayUsed = models.FloatField(default=0)
     openingDate = models.DateField(auto_now_add=True)
     closingDate = models.DateField(null=True)
