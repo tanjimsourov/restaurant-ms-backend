@@ -7,7 +7,7 @@ from django.utils import timezone
 import jwt
 from datetime import datetime, timedelta
 from django.conf import settings
-from users.otp import generateKey
+# from users.otp import generateKey
 
 
 def upload_to(instance, filename):
@@ -95,14 +95,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         default='',
         null=False
     )
-    dob = models.CharField(
-        _('dob'),
-        max_length=30,
-        default='',
-        null=False
-    )
-    location = models.CharField(
-        _('location'),
+
+    address = models.CharField(
+        _('address'),
         max_length=50,
         default='',
         null=False
@@ -118,47 +113,14 @@ class User(AbstractBaseUser, PermissionsMixin):
         max_length=8,
         default='',
     )
-    nominiName = models.CharField(
-        _('nominiName'),
-        max_length=30,
-        default='',
-    )
-    nominiFname = models.CharField(
-        _('nominiFname'),
-        max_length=30,
-        default='',
-    )
-    nominiMname = models.CharField(
-        _('nominiMname'),
-        max_length=30,
-        default='',
-    )
-    nominidob = models.CharField(
-        _('nominidob'),
-        max_length=30,
-        default='',
-    )
-    nominiRel = models.CharField(
-        _('nominiRel'),
-        max_length=15,
-        default='',
-    )
 
     profilePic = models.ImageField(
         _("Image"), upload_to=upload_to, default='profilePic/default.jpg')
 
-
-
-
     phone = models.CharField(max_length=11, blank=False, default=uuid.uuid1, unique=True)
     otp = models.IntegerField(null=True, blank=True)
-    somiti_type = models.CharField(max_length=10, blank=True, null=True)
     activation_key = models.CharField(max_length=150, blank=True, null=True)
     is_verified = models.BooleanField(default=False)
-    is_general = models.BooleanField(default=True)
-    is_loanee = models.BooleanField(default=False)
-    is_dps = models.BooleanField(default=False)
-    is_fdr = models.BooleanField(default=False)
     is_active = models.BooleanField(
         _('active'),
         default=True,
@@ -176,8 +138,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     )
 
-    is_administer = models.BooleanField(
-        _('administer'),
+    is_administrator = models.BooleanField(
+        _('administrator'),
         default=False,
 
     )

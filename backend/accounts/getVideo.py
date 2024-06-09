@@ -7,7 +7,7 @@ while True:
     ret,frame=webcam.read()
 
     if ret==True:
-        cv2.imshow("Koolac",frame)
+        cv2.imshow("res ",frame)
         key=cv2.waitKey(20) & 0xFF
         if key==ord("q"):
             break

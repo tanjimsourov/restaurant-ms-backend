@@ -1,6 +1,6 @@
 import jwt
 from rest_framework.authentication import get_authorization_header, BaseAuthentication
-from users.models import User
+from accounts.models import User
 
 from rest_framework import exceptions
 import jwt

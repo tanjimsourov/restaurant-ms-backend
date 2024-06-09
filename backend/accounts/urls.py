@@ -2,5 +2,5 @@ from accounts import views
 from django.urls import path
 
 urlpatterns = [
-     path('adddps', views.AddDPS.as_view(), name="AddDPS"),
+     path('superuser', views.SuperuserRegister.as_view(), name="superuser"),
 ]
