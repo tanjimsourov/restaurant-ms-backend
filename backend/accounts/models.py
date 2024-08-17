@@ -31,18 +31,18 @@ class MyUserManager(UserManager):
         return user
 
     def create_user(self, username, password=None, **extra_fields):
-        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', False)
-        extra_fields.setdefault('is_verified', False)
+        extra_fields.setdefault('is_verified', True)
         return self._create_user(username, password, **extra_fields)
 
-    def create_administer(self, username, password=None, **extra_fields):
+    def create_administrator(self, username, password=None, **extra_fields):
 
         if not password:
             raise ValueError("User must have a password")
 
         extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_administer', True)
+        extra_fields.setdefault('is_administrator', True)
         extra_fields.setdefault('is_verified', True)
         extra_fields.setdefault('is_admin', True)
         extra_fields.setdefault('is_active', True)
@@ -56,7 +56,7 @@ class MyUserManager(UserManager):
 
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('is_administer', True)
+        extra_fields.setdefault('is_administrator', True)
         extra_fields.setdefault('is_verified', True)
         extra_fields.setdefault('is_admin', True)
         extra_fields.setdefault('is_active', True)
