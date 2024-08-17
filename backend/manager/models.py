@@ -50,3 +50,4 @@ class UseItem(models.Model):
     material = models.ForeignKey(rawMaterial, related_name='UseItem', on_delete=models.CASCADE)
     quantity = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
+
