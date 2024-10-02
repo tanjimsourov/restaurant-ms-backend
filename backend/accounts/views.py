@@ -5,7 +5,8 @@ from django.contrib.auth import authenticate
 
 from .models import User
 # from .otp import generateKey
-from .serializers import SuperUserSerializer, AddRestaurantSerializer, AddRestaurantStaffSerializer
+from .serializers import (SuperUserSerializer, AddRestaurantSerializer, AddRestaurantStaffSerializer ,
+                          EmployeeDataSerializer)
 
 
 class SuperuserRegister(GenericAPIView):
@@ -82,3 +83,13 @@ class AddRestaurantEmployee(GenericAPIView):
             return Response({'message': "You do not have fucking rights to create restaurant data!"},
                             status=status.HTTP_400_BAD_REQUEST)
         return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GetRestaurantEmployeeList(GenericAPIView):
+    permission_classes = (permissions.IsAdminUser,)
+
+    def get(self, request):
+        restID = request.user.connectedRestaurant
+        model = User.objects.filter(connectedRestaurant=restID)
+        serializer = EmployeeDataSerializer(model, many=True)
+        return Response(serializer.data)

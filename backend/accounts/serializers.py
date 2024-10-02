@@ -45,3 +45,10 @@ class AddRestaurantStaffSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
+
+
+class EmployeeDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'full_name', 'address', 'nidNumber', 'connectedRestaurant', 'profilePic',
+                  'gender', 'phone', 'is_verified', 'is_admin', 'is_manager', 'is_waiter', 'is_staff')
